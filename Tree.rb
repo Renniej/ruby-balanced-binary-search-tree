@@ -55,10 +55,10 @@ class Tree
     found_node
   end
 
-  def find_insertion_leave(value, root)
+  def find_insertion_leaf(value, root)
     return root if root.leaf_node?
     if root.value <= value 
-       findInsertionLeaf(value, root.left_child)
+      find_insertion_leaf(value, root.left_child)
     else 
       find_insertion_leaf(value, root.right_child)
     end
