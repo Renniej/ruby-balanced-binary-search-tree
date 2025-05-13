@@ -33,6 +33,22 @@ class Tree
     end
   end
 
+  def level_order(queue = [@root], &block)
+    return if queue.empty?
+    node = queue.first
+    left = node.left_child
+    right = node.right_child
   
+    block.call(node)
+    if !left.nil?
+      queue.push(left)
+    end
+    if !right.nil?
+      queue.push(right)
+    end
+
+    level_order(queue, block)
+  end
+
 
 end
