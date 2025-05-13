@@ -5,6 +5,7 @@ class Node
     right_child
     
     constructor(value)
+    constructor(value)
         set property value to parameter value's value
     end
 
@@ -22,7 +23,24 @@ class Node
     leaf_node?
         return prev_node != null AND left_child == null AND right_child == null
     end
+    end
+
+    num_of_children
+       create a variable called count of type number with the initial value of 0
+       if the left_child is not null then
+            add 1 to count
+        end
+        if the right_child is not null then
+            add 1 to count
+        end
+        return count
+    end
+
+    leaf_node?
+        return prev_node != null AND left_child == null AND right_child == null
+    end
 end
+
 
 
 class Sortable 
@@ -59,6 +77,13 @@ class Tree
     end
 
  
+    find_and_replace(value, node, new_child)
+        if prev_node.right_child is equal to the value
+            set prev_node.right_child to new_child
+        else
+            set prev_node.left_child to new_child
+        end
+    end
     find_and_replace(value, node, new_child)
         if prev_node.right_child is equal to the value
             set prev_node.right_child to new_child
@@ -126,6 +151,17 @@ class Tree
             next_node = findInsertionLeaf(value, root.right_child)
         end
         return next_node
+    end
+
+    find(value) 
+        create a variable called found_node with the initial value of nil
+        call inorder(value) with the block(node)
+            if (node.value == value)
+                found_node = node
+                break block
+            end
+        end
+        return found_node
     end
 
     find(value) 
