@@ -20,5 +20,19 @@ class Tree
     return root
   end
 
-  def
+  def find_and_replace(value, node, new_child)
+    right = node.prev_node.right_child
+    left = node.prev_node.left_child
+
+    if right.value == value
+      node.prev_node.right_child = new_child
+    elsif left.value == value
+      node.prev_node.left_child = new_child
+    else
+      raise "Node's do not contain the value passed"
+    end
+  end
+
+  
+
 end
