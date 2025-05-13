@@ -4,10 +4,26 @@ class Node
     left_child
     right_child
     
-    constructor(value) {
+    constructor(value)
         set property value to parameter value's value
-    }
+    end
+
+    num_of_children
+       create a variable called count of type number with the initial value of 0
+       if the left_child is not null then
+            add 1 to count
+        end
+        if the right_child is not null then
+            add 1 to count
+        end
+        return count
+    end
+
+    leaf_node?
+        return prev_node != null AND left_child == null AND right_child == null
+    end
 end
+
 
 class Sortable 
 end
@@ -43,12 +59,44 @@ class Tree
     end
 
  
+    find_and_replace(value, node, new_child)
+        if prev_node.right_child is equal to the value
+            set prev_node.right_child to new_child
+        else
+            set prev_node.left_child to new_child
+        end
+    end
 
     delete(value)
+        create a variable called node of type Node with the initial value of find(value)
+        create a variable called prev_node of type node with the initial value of node.prev_value
+        if node is a leaf node (node.leaf_node?) then
+            call find_and_replace(value, node, null)
+        else if node has 1 child (node.num_of_children == 1) then
+            create a variable called child_node with the initial value of null
+            if the right_child is not null
+                set child node to right_node
+            else
+                set child node to left_node
+            end
+            call find_and_replace(value, node, child_node)
+        else if node has 2 children (node.num_of_children == 2) then
+
+
+
+
+
+
+
+
+
+        end
+
+
+
+
     end
 
-    find(value)
-    end
 
     level_order(&block)
     end
@@ -62,6 +110,17 @@ class Tree
             next_node = findInsertionLeaf(value, root.right_child)
         end
         return next_node
+    end
+
+    find(value) 
+        create a variable called found_node with the initial value of nil
+        call inorder(value) with the block(node)
+            if (node.value == value)
+                found_node = node
+                break block
+            end
+        end
+        return found_node
     end
 
     insert(value)
@@ -112,7 +171,20 @@ class Tree
         end
     end
 
+    height(value)
+        create a variable called count of type number with the initial value of 0
+        create a variable called node of type Node with the initial value of find(value)
 
+        if node is equal to nil 
+            return nil
+        else
+            while node.prev_node is not null
+                add 1 to count
+                set node to node.prev_node
+            end
+        end
+        return count
+    end
 
     #post_order(&block, root = @root)
         if block is null then return arr
