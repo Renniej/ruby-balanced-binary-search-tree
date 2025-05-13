@@ -50,5 +50,25 @@ class Tree
     level_order(queue, block)
   end
 
+  def find(value)
+    found_node = nil
+    inorder do | node |
+      if node.value == value
+        found_node = node
+        break;
+      end
+    end
+    found_node
+  end
 
+  def find_insertion_leave(value, root)
+    return root if root.leaf_node?
+    if root.value <= value 
+       findInsertionLeaf(value, root.left_child)
+    else 
+        findInsertionLeaf(value, root.right_child)
+    end
+  end
+
+  ch
 end
