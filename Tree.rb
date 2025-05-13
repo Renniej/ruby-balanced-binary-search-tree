@@ -28,6 +28,7 @@ class Tree
   end
 
   def level_order(queue = [@root], &block)
+    return if queue.empty?
     node = queue.first
     left = node.left_child
     right = node.right_child
