@@ -1,0 +1,136 @@
+class Node
+    value
+    prev_node
+    left_child
+    right_child
+    
+    constructor(value) {
+        set property value to parameter value's value
+    }
+end
+
+class Sortable 
+end
+
+class Tree 
+    root : Node
+    
+    constructor(arr)
+        create a variable called set of type Set with the inital value of new Set(arr)
+        create a variable called sorted of type array with the initial vallue of Sortable.sort(set.toArray())
+        set property root to return value of build_tree(arr)
+    end
+
+    build_tree(sorted) //assumes array is sorted
+        if sorted's length is 1 then
+            return a new node with the value of the first element in sorted
+        else
+            create a variable of type array called mid with the initial value of the middle value  sorted
+            create a variable called left with the initial value of the left side of sorted arr
+            create a variable called right with the initial value of the right side of sorted arr
+            
+            create a variable called root of type node with the initial value of new Node(mid)
+            create a variable called left of type node with the intiial value of build_tree(left half of the sorted)
+            create a variable called right of type node with the intiial value of build_tree(right half of the sorted)
+            return root
+        end
+    end
+
+    def pretty_print(node = @root, prefix = '', is_left = true)
+        pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+        puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+        pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+    end
+
+ 
+
+    delete(value)
+    end
+
+    find(value)
+    end
+
+    level_order(&block)
+    end
+
+    findInsertionLeaf(value, root)
+     if root.left_node is equal to null AND root.right_node is equal to null return root
+        create variable called nextNode with the initial value of null
+        if root.value <= value then
+            next_node = findInsertionLeaf(value, root.left_child)
+        else
+            next_node = findInsertionLeaf(value, root.right_child)
+        end
+        return next_node
+    end
+
+    insert(value)
+       create a variable called leaf_node with the initial value of findInsertionLeaf(value, @root)
+       create a variable called new_node with the initial value of new Node(value)
+        if leaf_node.value <= value 
+            leaf_node.left_child = new_node
+        else
+            leaf_node.right_child = new_node
+        end
+    end
+
+    #inorder(&block, root = @root)
+        if block is null then return arr
+        create a variable of type node called left with the initial value of root.prev_node
+        create a variable of type node called right with the initial value of left node
+
+        if left is not null
+            call &block(left)
+            call inorder(block, left)
+        end
+     
+        call &block(root)
+        
+        if right is not null 
+            call &block(right)
+            call inorder(block, right)
+        end
+    end
+
+
+    #preorder(&block, root = @root)
+        if block is null then return arr
+        create a variable of type node called left with the initial value of root.prev_node
+        create a variable of type node called right with the initial value of left node
+
+
+        call &block(root)
+
+        if left is not null
+            call &block(left)
+            call preorder(block, left)
+        end
+        
+        if right is not null 
+            call &block(right)
+            call preorder(block, right)
+        end
+    end
+
+
+
+    #post_order(&block, root = @root)
+        if block is null then return arr
+        create a variable of type node called left with the initial value of root.prev_node
+        create a variable of type node called right with the initial value of left node
+
+        if left is not null
+            call &block(left)
+            call preorder(block, left)
+        end
+        
+        if right is not null 
+            call &block(right)
+            call preorder(block, right)
+        end
+
+        call &block(root)
+    end
+
+
+
