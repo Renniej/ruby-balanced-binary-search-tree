@@ -23,18 +23,12 @@ class Tree
   def find_and_replace(value, node, new_child)
     right = node.prev_node.right_child
     left = node.prev_node.left_child
-
-    if right.value == value
-      node.prev_node.right_child = new_child
-    elsif left.value == value
-      node.prev_node.left_child = new_child
-    else
+    return  right.set_right_child(new_child) if right.value == value
+    return left.set_left_child(new_child) if left.value == value
       raise "Node's do not contain the value passed"
-    end
   end
 
   def level_order(queue = [@root], &block)
-    return if queue.empty?
     node = queue.first
     left = node.left_child
     right = node.right_child
