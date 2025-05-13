@@ -60,7 +60,17 @@ class Tree
     if root.value <= value 
        findInsertionLeaf(value, root.left_child)
     else 
-        findInsertionLeaf(value, root.right_child)
+      find_insertion_leaf(value, root.right_child)
+    end
+  end
+
+  def insert(value)
+    leaf_node =  find_insertion_leaf(value, @root)
+    new_node = Node.new(value)
+    if leaf_node.value <= value
+        leaf_node.set_left_child(new_node)
+    else
+      leaf_node.set_right_child(new_node)
     end
   end
 
