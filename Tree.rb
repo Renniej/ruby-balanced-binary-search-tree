@@ -19,6 +19,72 @@ class Tree
     return root
   end
 
+
+
+  def replace_child_of_value(node, new_node, value) 
+    if node.right_child.value == value
+      node.set_right_child(new_node)
+    elsif node.left_child.value == value
+      node.set_left_child(new_node)
+    else 
+      raise "Prev node does not contain a child with value : #{value}"
+    end
+  end
+
+  def delete_case_one(node)
+    return false if !node.leaf_node?
+    replace_child_of_value(prev_node, nil, value) 
+    true
+  end
+
+  def delete_case_two(node)
+    return false if node.num_of_children != 1
+    prev_node = node.prev_node
+    child = (node.right_child.nil?) ? node.left_child : node.right_child
+    replace_child_of_value(prev_node, child, value)
+    node.prev_node = nil
+    true
+  end
+
+  def delete_case_three(node) 
+    return false if node.num_of_children != 2
+    successor = nil
+    inorder(node.right_child) do |node|
+      if (successor.nil? || node.value <= successor.value)
+        successor = node
+      end
+    end
+    node.right_child.prev_node = successor
+    replace_child_of_value(successor.prev_node, node, successor.value)
+    [
+      delete_case_one, 
+      delete_case_two, 
+      delete_case_three
+    ].any? { |delete_case| delete_case(node)}
+    true
+  end
+
+  def delete(value)
+    return nil unless (node = find(value))
+    [
+      delete_case_one, 
+      delete_case_two, 
+      delete_case_three
+    ].any? { |delete_case| delete_case(node)}
+  end
+
+  def height
+  end
+
+  def balanced?
+  end
+
+  def rebalance
+  end
+
+
+
+
   def find_and_replace(value, node, new_child)
     right = node.prev_node.right_child
     left = node.prev_node.left_child
