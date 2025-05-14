@@ -90,7 +90,7 @@ class Tree
     left = node.prev_node.left_child
     return  right.set_right_child(new_child) if right.value == value
     return left.set_left_child(new_child) if left.value == value
-      raise "Node's do not contain the value passed"
+    raise "Node's do not contain the value passed"
   end
 
   def level_order(queue = [@root], &block)
