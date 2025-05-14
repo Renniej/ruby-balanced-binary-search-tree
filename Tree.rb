@@ -140,28 +140,28 @@ class Tree
     end
   end
 
-  def toArray
+  def toArray(&block = inorder)
     arr = []
-    inorder {|node| arr.push(node)}
+    block.call({|node| arr.push(node)})
     return arr
   end
 
   def inorder(&block, root = @root)
-    return toArray if block.nil?
+    return toArray(inorder) if block.nil?
     left_node = root.left_node
     right_node = root.right_node
     [left_node, root, right_node].compact.each {|node| block.call(node)}
   end
   
   def preorder(&block, root = @root)
-    return toArray if block.nil?
+    return toArray(preorder) if block.nil?
     left_node = root.left_node
     right_node = root.right_node
     [ root, left_node, right_node].compact.each {|node| block.call(node)}
   end
   
   def postorder(&block, root = @root)
-    return toArray if block.nil?
+    return toArray(postorder) if block.nil?
     left_node = root.left_node
     right_node = root.right_node
     [ left_node, right_node,root].compact.each {|node| block.call(node)}
