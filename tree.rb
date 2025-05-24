@@ -77,6 +77,7 @@ class Tree
   end
 
   def balanced?
+    
   end
 
   def rebalance
