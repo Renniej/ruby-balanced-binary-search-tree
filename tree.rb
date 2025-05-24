@@ -1,3 +1,5 @@
+require_relative 'node'
+
 class Tree
   @root
 
