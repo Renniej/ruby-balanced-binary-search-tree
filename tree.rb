@@ -2,7 +2,7 @@ class Tree
   @root
 
   def initialize(arr)
-    @root = build_tree(sort(arr)) #requires Sortable Mixin
+    @root = build_tree(arr.sort) #requires Sortable Mixin
   end
 
   def build_tree(sorted)
