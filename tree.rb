@@ -140,7 +140,12 @@ class Tree
     end
   end
 
-  def toArray(&block = inorder)
+  def toArray(&block)
+    if block.nil?
+      block = inorder
+    arr = []
+    addToArr = Proc.new {|node| arr.push(node)}
+    block.call(addToArr)
     arr = []
     block.call({|node| arr.push(node)})
     return arr
