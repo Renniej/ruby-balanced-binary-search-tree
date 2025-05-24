@@ -84,6 +84,11 @@ class Tree
   def rebalance
   end
 
+  def pretty_print(node = @root, prefix = '', is_left = true)
+   pretty_print(node.right_child, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right_child
+   puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.value}"
+   pretty_print(node.left_child, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left_child
+ end
 
 
 
