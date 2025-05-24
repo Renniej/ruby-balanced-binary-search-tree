@@ -1,6 +1,8 @@
 class Node
+
+  attr_accessor :prev_node
   @value
-  @prev_node
+
   @left_child
   @right_child
 
