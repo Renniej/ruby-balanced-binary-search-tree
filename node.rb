@@ -1,10 +1,8 @@
 class Node
 
-  attr_accessor :prev_node
-  @value
+  attr_accessor :prev_node, :left_child, :right_child, :value
 
-  @left_child
-  @right_child
+
 
   def initialize(value)
     @value = value
@@ -19,12 +17,12 @@ class Node
   end
 
   def set_right_child(node)
-    node.prev_node = self
+    node&.prev_node = self
     @right_child = node
   end
 
   def set_left_child(node)
-    node.prev_node = self
+    node&.prev_node = self
     @left_child = node
   end
   
