@@ -11,7 +11,7 @@ class Tree
     
     midIndex = sorted.length / 2
     right_half = sorted[0..midIndex]
-    left_half = sorted[mid+1..arr.size -1]
+    left_half = sorted[mid+1..(arr.size -1)]
     
     root = Node.new(arr[midIndex])
     root.set_left_child build_tree(left_half)
